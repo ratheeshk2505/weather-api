@@ -1,0 +1,138 @@
+:root{
+    --primary-bg: #ededed;
+    --primary-font: #000;
+    --div-select-bg: #490ed1;
+}
+.dark-mode{
+    --primary-bg: #020202;
+    --primary-font: #fff;
+    --div-select-bg: #959595;
+}
+
+.row-flex{
+    display: flex;
+    justify-content: center;
+    /* padding-top: 20px; */
+}
+.header{
+    align-items: center;
+}
+.search-div{
+    display: block;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0px;
+    margin: auto;
+    min-width: 150px;
+    max-width: 300px;
+}
+.search-input{
+    border: none;
+    width: 93%;
+    margin: 0px;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+.search-input:focus{
+    outline: none;
+}
+.search-match-div{
+    display: block;
+    border: 1px solid black;
+    margin: auto;
+    border-radius: 5px;
+    min-width: 150px;
+    max-width: 300px;
+}
+p{
+    margin: 0;
+    padding: 0 0.5rem 0 0.5rem;
+}
+p:hover{
+    background-color: #ccc0e6;
+}
+.city-name{
+    text-align: center;
+    font-size: 2rem;
+    padding: 0.3rem;
+}
+
+.button-design{
+    padding: 4px;
+    width: 90%;
+    min-width: 60px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #ccc0e6;
+    color: var(--primary-font);
+
+}
+.sub-title{
+    padding: 0.3rem;
+    margin: 0;
+    font-size: 0.8rem;
+    
+}
+.oneday-div{
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0.6rem;
+    text-align: center;
+    /* z-index: 1; */
+}
+
+.seven-day-div{
+    margin: 0;
+    padding: 0;
+}
+.seven-day-div:hover{
+    transform: scaleY(1.1);
+    cursor: pointer;
+}
+.display{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+.img-center{
+    display: block;
+    justify-content: center;
+    text-align: center;
+}
+.main-weather-temp{
+    font-size: 6rem;
+    padding: 0;
+}
+.degree{
+    font-size: 1.8rem;
+}
+.main-weather-add-details{
+    margin-top: 20px;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    min-height: 80px;
+    text-align: center;
+}   
+.button-position{
+    display: flex;
+    justify-content: center;
+}
+.select-button{
+    font-size: 1rem;
+    padding: 0.2rem;
+    margin: 0;
+    width: 20%;
+    border: 1px solid black;
+    background-color: var(--primary-bg);
+}
+button.active{
+    background-color: rgb(230, 223, 213);
+}

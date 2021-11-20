@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="row my-3">
+        <div class="col-12 header">
+            <div class="row-flex"><i class="fas fa-2x fa-cloud"></i>
+                <h2> Weather API</h2>
+            </div>
+            <form (ngSubmit)="fetchTemp()" class="">
+                <div class="search-div ">
+                    <input type="search" [(ngModel)]="city" name="city" (keyup)="fetchMatch()" onfocus="this.value=''"
+                        class="search-input" value="Search">
+                    <a type="submit" class=""><i class="fas fa-search"></i></a>
+                </div>
+                <section *ngIf="searchMatch" class="search-match-div">
+                    <div *ngFor="let match of searchMatch">
+                        <p id="{{match.lat}},{{match.lon}}" (click)="fetchCity($event)">{{match.name}}</p>
+                    </div>
+                    <!-- <p *ngIf="searchMatch.length < 1">No match found..</p> -->
+                </section>
+            </form>
+        </div>
+    </div>
+    <div class="container" *ngIf="weatherData">
+        <div class="row mb-2">
+            <h3 class="city-name">{{c_name}}, {{c_region}}</h3>
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="img-center">
+                    <img src='{{c_icon}}' alt="{{c_text}}"
+                        width="120px" height="120px">
+                        <h6>{{c_text}}</h6>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 center">
+                <h2 class="main-weather-temp">{{c_currTemp | number:'0.0-0'}}</h2>
+                <span>
+                    <span class="degree fw-bold"> &#8451; </span>
+                    <!-- <span class="degree">|</span> <span class="degree" (click)="toF()" > &#8457;</span> -->
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div *ngIf="tempCall" class="main-weather-add-details">
+                    <span class="">High Temp : {{c_maxTemp | number:'0.0-0'}}</span><span
+                        class="">&#8451; </span> <br>
+                        <span class="">Low Temp : {{c_minTemp | number:'0.0-0'}}</span><span
+                        class="">&#8451; </span>
+                </div>
+                <div *ngIf="windCall" class="main-weather-add-details">
+                    <span class="">Wind Speed : {{c_windSpeed}}</span> <span>kph</span><br>
+                </div>
+                <div *ngIf="humPreCall" class="main-weather-add-details">
+                    <span class="">Humidity : {{c_humidity |
+                        number:'0.0-0'}}</span><span>&#37;</span><br>
+                </div>
+                <div class="button-position">
+                    <button type="button" (click)="temp()" class="select-button ">Temp</button>
+                    <button type="button" (click)="humPre()" class="select-button">Humi</button>
+                    <button type="button" (click)="wind()" class="select-button">Wind</button>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <app-chart></app-chart>
+        </div>
+        <div class="row my-3">
+            <div class="seven-day-div col-sm-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let data of foreCastData">
+                <div class="oneday-div" (click)="display($event)" id="{{data.date_epoch}}">
+                    <h6 class="ps-3">{{unixToDate(data.date_epoch)}}</h6>
+                    <img src='{{data.day.condition.icon}}' title="{{data.day.condition.text}}">
+                    <h6 class="mt-3">{{data.day.condition.text}}</h6>
+                    <span class="center">
+                        <h4 class="mb-0 pb-0"><span class="sub-title">Max</span>{{data.day.maxtemp_c | number:'0.0-0'}}<sup>&#8451;</sup></h4>
+                        <h5 class="mb-0 pb-0"><span class="sub-title">Min</span>{{data.day.mintemp_c | number:'0.0-0'}}<sup>&#8451;</sup></h5>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

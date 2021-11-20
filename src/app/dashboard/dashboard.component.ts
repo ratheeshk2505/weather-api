@@ -92,6 +92,23 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  activeButton(event:any){
+    let clickedElement = event.target || event.srcElement;
+    if( clickedElement.nodeName === "BUTTON" ) {
+      let alreadyActive = clickedElement.parentElement.querySelector(".active");
+      // if a Button already has Class: .active
+      if( alreadyActive ) {
+        alreadyActive.classList.remove("active");
+      }
+      clickedElement.className += " active";
+    }
+  }
+
+  toggleTheme() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+  }
+
   dayCodeSave(){
     this.dayCode = this.foreCastData.map((arr:any)=>arr.date_epoch)
   }
@@ -115,6 +132,17 @@ export class DashboardComponent implements OnInit {
   }
 
   display(event: any) {  
+    
+    // let clickedElement = event.target || event.srcElement;
+    // if( clickedElement.nodeName === "DIV" ) {
+    //   let alreadyActive = clickedElement.parentElement.querySelector(".active");
+    //   // if a Button already has Class: .active
+    //   if( alreadyActive ) {
+    //     alreadyActive.classList.remove("active");
+    //   }
+    //   clickedElement.className += " active";
+    // }
+
     this.date = event.target.id
     for (let selectedDay of this.foreCastData) {      
       if (selectedDay.date_epoch == this.date) {

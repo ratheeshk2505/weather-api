@@ -2,14 +2,17 @@
     <div class="row my-3">
         <div class="col-12 header">
             <div class="row-flex"><i class="fas fa-2x fa-cloud"></i>
-                <h2> Weather API</h2>
+                <h2>  Weather API</h2>
             </div>
+            <a class="toggle-button" (click)="toggleTheme()"><i class="fas fa-adjust" title="Dark/Light Mode"></i></a>
             <form (ngSubmit)="fetchTemp()" class="">
                 <div class="search-div ">
+
                     <input type="search" [(ngModel)]="city" name="city" (keyup)="fetchMatch()" onfocus="this.value=''"
                         class="search-input" value="Search">
                     <a type="submit" class=""><i class="fas fa-search"></i></a>
                 </div>
+
                 <section *ngIf="searchMatch" class="search-match-div">
                     <div *ngFor="let match of searchMatch">
                         <p id="{{match.lat}},{{match.lon}}" (click)="fetchCity($event)">{{match.name}}</p>
@@ -50,8 +53,8 @@
                     <span class="">Humidity : {{c_humidity |
                         number:'0.0-0'}}</span><span>&#37;</span><br>
                 </div>
-                <div class="button-position">
-                    <button type="button" (click)="temp()" class="select-button ">Temp</button>
+                <div class="button-position" (click)="activeButton($event)">
+                    <button type="button" (click)="temp()" class="select-button active">Temp</button>
                     <button type="button" (click)="humPre()" class="select-button">Humi</button>
                     <button type="button" (click)="wind()" class="select-button">Wind</button>
                 </div>

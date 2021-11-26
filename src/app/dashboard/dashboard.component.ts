@@ -11,7 +11,8 @@ export class DashboardComponent implements OnInit {
   weatherData: any
   foreCastData: any
   searchMatch: any
-  c_name: any
+  c_day:any
+  c_name:any
   c_region: any
   c_icon: any
   c_text: any
@@ -22,7 +23,7 @@ export class DashboardComponent implements OnInit {
   c_humidity: any
 
   unit:any
-  city:any
+  city='Type atleast 3 letters..'
   lat_lon :any
   cityKey:any
   day:any
@@ -39,19 +40,24 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchMatch() {
-    this.ds.fetchMatch(this.city)
+    if(this.city.length>2){
+      this.ds.fetchMatch(this.city)
     .subscribe((result:any)=>{
-      if(result){       
-        // console.log(result);
+      console.log(result);
+      
+      if(result.length>0){       
         this.searchMatch = result.slice(0, 5)
       }
     },(result:any)=>{
       alert(result.error.message)
     })
-    
+    }   
+    else{
+      this.searchMatch = ""
+    } 
   }
 
-  fetchCity(event: any) {
+  fetchCity(event: any) {   
     this.city = event.target.innerText
     this.lat_lon = event.target.id
     this.searchMatch = ""
@@ -77,6 +83,7 @@ export class DashboardComponent implements OnInit {
         // this.c_humidity = this.weatherData.current.humidity
         
         // forecast
+        this.c_day = this.unixToDate(this.foreCastData[0].date_epoch)
         this.c_icon = this.foreCastData[0].day.condition.icon
         this.c_text = this.foreCastData[0].day.condition.text
         this.c_currTemp = this.foreCastData[0].day.avgtemp_c
@@ -148,6 +155,7 @@ export class DashboardComponent implements OnInit {
       if (selectedDay.date_epoch == this.date) {
         console.log("clicked div", true);
 
+        this.c_day = this.unixToDate(selectedDay.date_epoch)
         this.c_icon = selectedDay.day.condition.icon
         this.c_text = selectedDay.day.condition.text
         this.c_currTemp = selectedDay.day.avgtemp_c

@@ -4,9 +4,9 @@
     --div-select-bg: #8e8c91;
 }
 .dark-mode{
-    --primary-bg: #484848;
+    --primary-bg: #000;
     --primary-font: #fff;
-    --div-select-bg: #000000;
+    --div-select-bg: #484848;
 }
 body{
     background-color: var(--primary-bg);
@@ -78,6 +78,14 @@ p:hover{
     text-align: center;
     font-size: 2rem;
     padding: 0.3rem;
+    margin: 0;
+    color: var(--primary-font);
+}
+.day{
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.3rem;
+    margin: 0;
     color: var(--primary-font);
 }
 

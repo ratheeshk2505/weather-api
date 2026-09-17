@@ -1,0 +1,34 @@
+{
+  "name": "Weather API - Live Forecasts & 7-Day Outlook",
+  "short_name": "Weather API",
+  "description": "Search any city worldwide for real-time weather conditions, hourly temperature charts, humidity, wind speed and a 7-day forecast",
+  "start_url": "/weather-api/",
+  "scope": "/weather-api/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0a0a0f",
+  "background_color": "#08080c",
+  "icons": [
+    {
+      "src": "./assets/images/weather-icon-png-11064.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/images/weather-icon-png-11064.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./assets/images/weather-icon-png-11064.png",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["weather", "productivity"],
+  "prefer_related_applications": false
+}

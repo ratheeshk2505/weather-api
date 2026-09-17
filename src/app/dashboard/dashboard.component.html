@@ -1,85 +1,96 @@
-<div class="container-fluid">
-    <div class="row my-3">
+<main class="container-fluid" id="main-content">
+    <header class="row my-3">
         <div class="col-12 header">
-            <div class="row-flex"><i class="fas fa-2x fa-cloud"></i>
-                <h2>  Weather API</h2>
+            <div class="row-flex">
+                <i class="fas fa-2x fa-cloud" aria-hidden="true"></i>
+                <h1 class="h2 m-0">Weather API</h1>
             </div>
-            <a class="toggle-button" (click)="toggleTheme()"><i class="fas fa-adjust" title="Dark/Light Mode"></i></a>
-            <form (ngSubmit)="fetchTemp()" class="">
-                <div class="search-div ">
+            <button type="button" class="toggle-button" (click)="toggleTheme()"
+                [attr.aria-pressed]="isLightTheme ? 'true' : 'false'" aria-label="Toggle dark and light theme">
+                <i class="fas fa-adjust" aria-hidden="true"></i>
+            </button>
 
-                    <input type="search" [(ngModel)]="city" name="city" (keyup)="fetchMatch()" onfocus="this.value=''"
-                        class="search-input" value="Search">
-                    <a type="submit" class=""><i class="fas fa-search"></i></a>
+            <form (ngSubmit)="fetchTemp()" role="search">
+                <div class="search-div">
+                    <label for="citySearch" class="visually-hidden">Search for a city</label>
+                    <input id="citySearch" type="search" [(ngModel)]="city" name="city" (keyup)="fetchMatch()"
+                        onfocus="this.value=''" class="search-input" value="Search"
+                        aria-label="Search for a city"
+                        [attr.aria-expanded]="searchMatch ? 'true' : 'false'" aria-controls="citySearchResults"
+                        autocomplete="off">
+                    <button type="submit" aria-label="Search" class="search-btn">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
                 </div>
 
-                <section *ngIf="searchMatch" class="search-match-div">
+                <section *ngIf="searchMatch" id="citySearchResults" class="search-match-div" aria-live="polite">
                     <div *ngFor="let match of searchMatch">
-                        <p id="{{match.lat}},{{match.lon}}" (click)="fetchCity($event)">{{match.name}}</p>
+                        <p id="{{match.lat}},{{match.lon}}" tabindex="0" role="button" class="search-result-item"
+                            (click)="fetchCity($event)" (keydown.enter)="fetchCity($event)" (keydown.space)="fetchCity($event)">
+                            {{match.name}}
+                        </p>
                     </div>
-                    <!-- <p *ngIf="!searchMatch">No match found..</p> -->
                 </section>
             </form>
         </div>
-    </div>
+    </header>
+
     <div class="container" *ngIf="weatherData">
         <div class="row mb-2">
-            <h3 class="city-name">{{c_name}}, {{c_region}}</h3>
-            <h6 class="day">{{c_day}}</h6>
+            <h2 class="city-name">{{c_name}}, {{c_region}}</h2>
+            <p class="day">{{c_day}}</p>
             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                 <div class="img-center">
-                    <img src='{{c_icon}}' alt="{{c_text}}"
-                        width="120px" height="120px">
-                        <h6>{{c_text}}</h6>
+                    <img src='{{c_icon}}' alt="Current conditions: {{c_text}}"
+                        width="120" height="120">
+                        <h3 class="h6">{{c_text}}</h3>
                 </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 center">
-                <h2 class="main-weather-temp">{{c_currTemp | number:'0.0-0'}}</h2>
+                <p class="main-weather-temp" [attr.aria-label]="'Current temperature ' + (c_currTemp | number:'0.0-0') + ' degrees Celsius'">{{c_currTemp | number:'0.0-0'}}</p>
                 <span>
-                    <span class="degree fw-bold"> &#8451; </span>
-                    <!-- <span class="degree">|</span> <span class="degree" (click)="toF()" > &#8457;</span> -->
+                    <span class="degree fw-bold" aria-hidden="true"> &#8451; </span>
                 </span>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                <div *ngIf="tempCall" class="main-weather-add-details">
-                    <span class="">High Temp : {{c_maxTemp | number:'0.0-0'}}</span><span
-                        class="">&#8451; </span> <br>
-                        <span class="">Low Temp : {{c_minTemp | number:'0.0-0'}}</span><span
-                        class="">&#8451; </span>
+                <div *ngIf="tempCall" class="main-weather-add-details" role="status">
+                    <span>High Temp : {{c_maxTemp | number:'0.0-0'}}</span><span>&#8451; </span> <br>
+                    <span>Low Temp : {{c_minTemp | number:'0.0-0'}}</span><span>&#8451; </span>
                 </div>
-                <div *ngIf="windCall" class="main-weather-add-details">
-                    <span class="">Wind Speed : {{c_windSpeed}}</span> <span>kph</span><br>
+                <div *ngIf="windCall" class="main-weather-add-details" role="status">
+                    <span>Wind Speed : {{c_windSpeed}}</span> <span>kph</span><br>
                 </div>
-                <div *ngIf="humPreCall" class="main-weather-add-details">
-                    <span class="">Humidity : {{c_humidity |
-                        number:'0.0-0'}}</span><span>&#37;</span><br>
+                <div *ngIf="humPreCall" class="main-weather-add-details" role="status">
+                    <span>Humidity : {{c_humidity | number:'0.0-0'}}</span><span>&#37;</span><br>
                 </div>
-                <div class="button-position" (click)="activeButton($event)">
-                    <button type="button" (click)="temp()" class="select-button active">Temp</button>
-                    <button type="button" (click)="humPre()" class="select-button">Humi</button>
-                    <button type="button" (click)="wind()" class="select-button">Wind</button>
+                <div class="button-position" role="group" aria-label="Choose weather detail to display">
+                    <button type="button" (click)="temp()" class="select-button" [attr.aria-pressed]="tempCall">Temp</button>
+                    <button type="button" (click)="humPre()" class="select-button" [attr.aria-pressed]="humPreCall">Humi</button>
+                    <button type="button" (click)="wind()" class="select-button" [attr.aria-pressed]="windCall">Wind</button>
                 </div>
             </div>
         </div>
         <div class="row my-3">
             <app-chart></app-chart>
         </div>
-        <div class="row my-3">
-            <div class="seven-day-div col-sm-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let data of foreCastData">
-                <div class="oneday-div" (click)="display($event)" id="{{data.date_epoch}}">
-                    <h6 class="ps-3" (click)="display($event)" id="{{data.date_epoch}}">{{unixToDate(data.date_epoch)}}</h6>
-                    <img src='{{data.day.condition.icon}}' title="{{data.day.condition.text}}" (click)="display($event)" id="{{data.date_epoch}}">
-                    <h6 class="mt-3" (click)="display($event)" id="{{data.date_epoch}}">{{data.day.condition.text}}</h6>
+        <div class="row my-3" role="list" aria-label="7 day forecast">
+            <div class="seven-day-div col-sm-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let data of foreCastData" role="listitem">
+                <div class="oneday-div" tabindex="0" role="button"
+                    [attr.aria-label]="unixToDate(data.date_epoch) + ': ' + data.day.condition.text + ', high ' + (data.day.maxtemp_c | number:'0.0-0') + ' and low ' + (data.day.mintemp_c | number:'0.0-0') + ' degrees Celsius'"
+                    id="{{data.date_epoch}}"
+                    (click)="display($event)" (keydown.enter)="display($event)" (keydown.space)="display($event)">
+                    <h3 class="h6 ps-3">{{unixToDate(data.date_epoch)}}</h3>
+                    <img src='{{data.day.condition.icon}}' alt="{{data.day.condition.text}}" title="{{data.day.condition.text}}">
+                    <h4 class="h6 mt-3">{{data.day.condition.text}}</h4>
                     <span class="center">
-                        <h4 class="mb-0 pb-0" (click)="display($event)" id="{{data.date_epoch}}">
-                            <span class="sub-title" (click)="display($event)" id="{{data.date_epoch}}">Max</span>{{data.day.maxtemp_c | number:'0.0-0'}}<sup>&#8451;</sup>
-                        </h4>
-                        <h4 class="mb-0 pb-0" (click)="display($event)" id="{{data.date_epoch}}">
-                            <span class="sub-title" (click)="display($event)" id="{{data.date_epoch}}">Min</span>{{data.day.mintemp_c | number:'0.0-0'}}<sup>&#8451;</sup>
-                        </h4>
+                        <h5 class="mb-0 pb-0 h4">
+                            <span class="sub-title">Max</span>{{data.day.maxtemp_c | number:'0.0-0'}}<sup>&#8451;</sup>
+                        </h5>
+                        <h5 class="mb-0 pb-0 h4">
+                            <span class="sub-title">Min</span>{{data.day.mintemp_c | number:'0.0-0'}}<sup>&#8451;</sup>
+                        </h5>
                     </span>
                 </div>
             </div>
         </div>
     </div>
-</div>

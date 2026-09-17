@@ -2,20 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Weather</title>
+  <title>Weather API — Live Forecasts, Hourly Trends & 7-Day Outlook</title>
+  <meta name="description" content="Search any city worldwide for real-time weather conditions, hourly temperature charts, humidity, wind speed and a 7-day forecast — fast, accessible, and free.">
+  <meta name="keywords" content="weather app, weather forecast, live weather, 7 day forecast, hourly temperature, humidity, wind speed, city weather search">
+  <meta name="author" content="Weather API">
+  <meta name="robots" content="index, follow">
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://ratheeshk2505.github.io/weather-api/">
+
+  <!-- Theme / PWA -->
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weather API — Live Forecasts, Hourly Trends & 7-Day Outlook">
+  <meta property="og:description" content="Search any city worldwide for real-time weather conditions, hourly temperature charts, humidity, wind speed and a 7-day forecast.">
+  <meta property="og:image" content="./assets/images/weather-bg.jpeg">
+  <meta property="og:site_name" content="Weather API">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weather API — Live Forecasts, Hourly Trends & 7-Day Outlook">
+  <meta name="twitter:description" content="Real-time weather, hourly charts and a 7-day forecast for any city.">
+  <meta name="twitter:image" content="./assets/images/weather-bg.jpeg">
+
   <link rel="icon" type="image/png" href="./assets/images/weather-icon-png-11064.png"/>
-  
-  <!-- bootstrap css -->
+  <link rel="apple-touch-icon" href="./assets/images/weather-icon-png-11064.png">
+
+  <!-- Preconnects and DNS prefetch for performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://kit.fontawesome.com">
+
+  <!-- bootstrap css with font-display swap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <!-- bootstarp javascript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-  <!-- fontawsom -->
-  <script src="https://kit.fontawesome.com/da1cf35165.js" crossorigin="anonymous"></script>
-  
+  <!-- bootstarp javascript with defer -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <!-- fontawesome with async -->
+  <script async src="https://kit.fontawesome.com/da1cf35165.js" crossorigin="anonymous"></script>
+
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Weather API",
+    "applicationCategory": "WeatherApplication",
+    "operatingSystem": "Any",
+    "description": "Search any city worldwide for real-time weather conditions, hourly temperature charts, humidity, wind speed and a 7-day forecast.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
 </head>
-<body>
+<body class="dark-theme">
+  <noscript>
+    <p style="padding:1rem;font-family:sans-serif;">This weather app requires JavaScript to display live forecasts. Please enable JavaScript in your browser to continue.</p>
+  </noscript>
   <app-root></app-root>
 </body>
 </html>

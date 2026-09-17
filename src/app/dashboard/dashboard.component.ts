@@ -43,23 +43,22 @@ export class DashboardComponent implements OnInit {
     if(this.city.length>2){
       this.ds.fetchMatch(this.city)
     .subscribe((result:any)=>{
-      console.log(result);
-      
-      if(result.length>0){       
+      if(result.length>0){
         this.searchMatch = result.slice(0, 5)
       }
     },(result:any)=>{
       alert(result.error.message)
     })
-    }   
+    }
     else{
       this.searchMatch = ""
-    } 
+    }
   }
 
-  fetchCity(event: any) {   
-    this.city = event.target.innerText
-    this.lat_lon = event.target.id
+  fetchCity(event: any) {
+    const targetEl = event.currentTarget || event.target
+    this.city = targetEl.innerText
+    this.lat_lon = targetEl.id
     this.searchMatch = ""
     this.fetchTemp()
   }
@@ -92,28 +91,19 @@ export class DashboardComponent implements OnInit {
         this.c_windSpeed = this.foreCastData[0].day.maxwind_kph
         this.c_humidity = this.foreCastData[0].day.avghumidity
         this.dayCodeSave()
-        console.log(this.weatherData);
       }
     },(result:any)=>{
       alert(result.error.message)
     })
   }
 
-  activeButton(event:any){
-    let clickedElement = event.target || event.srcElement;
-    if( clickedElement.nodeName === "BUTTON" ) {
-      let alreadyActive = clickedElement.parentElement.querySelector(".active");
-      // if a Button already has Class: .active
-      if( alreadyActive ) {
-        alreadyActive.classList.remove("active");
-      }
-      clickedElement.className += " active";
-    }
-  }
+  isLightTheme = false;
 
   toggleTheme() {
-    var element = document.body;
-    element.classList.toggle("dark-mode");
+    const element = document.body;
+    this.isLightTheme = !this.isLightTheme;
+    element.classList.toggle('light-theme', this.isLightTheme);
+    element.classList.toggle('dark-theme', !this.isLightTheme);
   }
 
   dayCodeSave(){
@@ -138,23 +128,13 @@ export class DashboardComponent implements OnInit {
     this.humPreCall = false;
   }
 
-  display(event: any) {  
-    
-    // let clickedElement = event.target || event.srcElement;
-    // if( clickedElement.nodeName === "DIV" ) {
-    //   let alreadyActive = clickedElement.parentElement.querySelector(".active");
-    //   // if a Button already has Class: .active
-    //   if( alreadyActive ) {
-    //     alreadyActive.classList.remove("active");
-    //   }
-    //   clickedElement.className += " active";
-    // }
-
-    this.date = event.target.id
-    for (let selectedDay of this.foreCastData) {      
+  display(event: any) {
+    // Use currentTarget so the click/keyboard activation is read from the
+    // element the handler is bound to (the forecast card), not whichever
+    // inner element (icon, heading, etc.) triggered the bubbled event.
+    this.date = (event.currentTarget || event.target).id
+    for (let selectedDay of this.foreCastData) {
       if (selectedDay.date_epoch == this.date) {
-        console.log("clicked div", true);
-
         this.c_day = this.unixToDate(selectedDay.date_epoch)
         this.c_icon = selectedDay.day.condition.icon
         this.c_text = selectedDay.day.condition.text

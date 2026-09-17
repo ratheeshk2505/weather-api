@@ -60,28 +60,51 @@ export class ChartComponent implements OnInit {
   }
 
   chart() {
+    const rootStyles = getComputedStyle(document.documentElement);
+    const fontColor = rootStyles.getPropertyValue('--primary-font').trim() || '#f3f4f8';
+    const gridColor = rootStyles.getPropertyValue('--border-color').trim() || 'rgba(255,255,255,0.08)';
+    const accent = rootStyles.getPropertyValue('--accent').trim() || '#4d8dff';
+
+    const gradient = this.canvas.getContext('2d').createLinearGradient(0, 0, 0, 220);
+    gradient.addColorStop(0, 'rgba(77, 141, 255, 0.45)');
+    gradient.addColorStop(1, 'rgba(77, 141, 255, 0.02)');
+
     this.myChart = new Chart(this.canvas, {
       type: 'line',
       data: {
         datasets: [{
-          label: 'Hourly Temperature',
+          label: 'Hourly Temperature (°C)',
           data: this.temp,
-          backgroundColor: "rgb(0,0,0, 0.2)",
-          borderColor: "#515911",
+          backgroundColor: gradient,
+          borderColor: accent,
+          pointBackgroundColor: accent,
+          pointBorderColor: '#fff',
+          pointRadius: 3,
+          borderWidth: 3,
+          tension: 0.35,
           fill: true,
         }],
         labels: this.time
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: { color: fontColor }
+          }
+        },
         scales: {
           x: {
+            ticks: { color: fontColor },
             grid: {
               display: false
             }
           },
           y: {
+            ticks: { color: fontColor },
             grid: {
-              display: false
+              color: gridColor
             }
           }
         }

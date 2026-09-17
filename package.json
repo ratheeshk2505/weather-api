@@ -7,6 +7,7 @@
     "build": "ng build --configuration production --base-href \"/weather-api/\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "deploy": "ng build --configuration production --base-href \"/weather-api/\" && npx angular-cli-ghpages --dir=dist/weather-api",
     "heroku-postbuild": "ng build"
   },
   "private": true,

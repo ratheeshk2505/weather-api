@@ -1,20 +1,69 @@
 <!DOCTYPE html><html lang="en"><head>
   <meta charset="utf-8">
-  <title>Weather</title>
+  <title>Weather API — Live Forecasts, Hourly Trends &amp; 7-Day Outlook</title>
+  <meta name="description" content="Search any city worldwide for real-time weather conditions, hourly temperature charts, humidity, wind speed and a 7-day forecast — fast, accessible, and free.">
+  <meta name="keywords" content="weather app, weather forecast, live weather, 7 day forecast, hourly temperature, humidity, wind speed, city weather search">
+  <meta name="author" content="Weather API">
+  <meta name="robots" content="index, follow">
   <base href="/weather-api/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://ratheeshk2505.github.io/weather-api/">
+
+  <!-- Theme / PWA -->
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weather API — Live Forecasts, Hourly Trends &amp; 7-Day Outlook">
+  <meta property="og:description" content="Search any city worldwide for real-time weather conditions, hourly temperature charts, humidity, wind speed and a 7-day forecast.">
+  <meta property="og:image" content="./assets/images/weather-bg.jpeg">
+  <meta property="og:site_name" content="Weather API">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weather API — Live Forecasts, Hourly Trends &amp; 7-Day Outlook">
+  <meta name="twitter:description" content="Real-time weather, hourly charts and a 7-day forecast for any city.">
+  <meta name="twitter:image" content="./assets/images/weather-bg.jpeg">
+
   <link rel="icon" type="image/png" href="./assets/images/weather-icon-png-11064.png">
-  
-  <!-- bootstrap css -->
+  <link rel="apple-touch-icon" href="./assets/images/weather-icon-png-11064.png">
+
+  <!-- Preconnects and DNS prefetch for performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+  <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin="">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://kit.fontawesome.com">
+
+  <!-- bootstrap css with font-display swap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <!-- bootstarp javascript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-  <!-- fontawsom -->
-  <script src="https://kit.fontawesome.com/da1cf35165.js" crossorigin="anonymous"></script>
-  
-<style>:root{--primary-bg:#ededed;--primary-font:#000000;--div-select-bg:#8e8c91}body{background-color:var(--primary-bg);color:var(--primary-font)}</style><link rel="stylesheet" href="styles.c58b7d0e88d6489f.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.c58b7d0e88d6489f.css"></noscript></head>
-<body>
+  <!-- bootstarp javascript with defer -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <!-- fontawesome with async -->
+  <script async="" src="https://kit.fontawesome.com/da1cf35165.js" crossorigin="anonymous"></script>
+
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Weather API",
+    "applicationCategory": "WeatherApplication",
+    "operatingSystem": "Any",
+    "description": "Search any city worldwide for real-time weather conditions, hourly temperature charts, humidity, wind speed and a 7-day forecast.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+<style>:root{--primary-bg:#08080c;--bg-gradient:radial-gradient(circle at 20% -10%, #1c2333 0%, #08080c 45%), radial-gradient(circle at 90% 10%, #1a1030 0%, transparent 40%);--surface:#131318;--surface-2:#1b1b22;--primary-font:#f3f4f8;--muted-font:#a3a7b7;--div-select-bg:linear-gradient(145deg, #2b6fe0, #7a4de0);--accent:#4d8dff;--accent-2:#8a5cff;--border-color:rgba(255, 255, 255, .08);--shadow-dark:rgba(0, 0, 0, .65);--shadow-light:rgba(255, 255, 255, .035);--focus-ring:#7ab8ff;--radius-lg:20px;--radius-md:14px;--radius-sm:10px}.dark-theme{--primary-bg:#08080c}*,*:before,*:after{box-sizing:border-box}html{scroll-behavior:smooth}body{min-height:100vh;background-color:var(--primary-bg);background-image:var(--bg-gradient);background-attachment:fixed;color:var(--primary-font);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;transition:background-color .35s ease,color .35s ease}@media (prefers-reduced-motion: reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}</style><link rel="stylesheet" href="styles.f07efdbe266128e6.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.f07efdbe266128e6.css"></noscript></head>
+<body class="dark-theme">
+  <noscript>
+    <p style="padding:1rem;font-family:sans-serif;">This weather app requires JavaScript to display live forecasts. Please enable JavaScript in your browser to continue.</p>
+  </noscript>
   <app-root></app-root>
-<script src="runtime.952ca8c387a77d9e.js" type="module"></script><script src="polyfills.ab3a0645eaf3ff48.js" type="module"></script><script src="main.c3e71f7227d5605a.js" type="module"></script>
+<script src="runtime.952ca8c387a77d9e.js" type="module"></script><script src="polyfills.dbf40050cf5cf116.js" type="module"></script><script src="main.203ca615ac4b3165.js" type="module"></script>
 
 </body></html>
